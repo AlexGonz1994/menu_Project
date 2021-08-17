@@ -9,7 +9,7 @@ const breakfastMenu = document.createElement("ul");
 const childMenu = document.createElement("ul");
 const allYouCanEatMenu = document.createElement("ul");
 const mealMenu = document.createElement("ul");
-
+const drinkMenu = document.createElement("ul")
 
 const displayMenu = document.createElement("button");
 const displayEntreeMenu = document.createElement("button");
@@ -19,8 +19,12 @@ const displayLunchMenu = document.createElement("button");
 const displayChildMenu = document.createElement("button");
 const displayAllEatMenu = document.createElement("button");
 const displayMealMenu = document.createElement("button");
+const displayDrinkMenu = document.createElement("button");
+
+const menuNav = document.createElement("nav")
 
 body.append(div)
+div.append(menuNav)
 
 let menuItems = [
     {name: "Eggs & Rice", tag: ["all","Children"], img: "./food_Items/Breakfast/Child-Eggs-Rice.jpg", price: "7.99"},
@@ -34,12 +38,6 @@ let menuItems = [
     {name: "Pork Ramen", tag: ["all","Dinner"], img: "./food_Items/Dinner/Ramen-Pork.jpg", price: "8.99"},
     {name: "All you Can Eat Shabu Shabu", tag: ["all","Dinner", "All You Can Eat"], img: "./food_Items/Dinner/Shabu-Shabu-All-You-Can-Eat.jpg", price: "60"},
     {name: "Wagyu Beef", tag: ["all","Dinner"], img: "./food_Items/Dinner/Wagyu-Beef.jpg", price: "20.00"},
-    {name: "Asahi", tag:["all", "Drinks", "Alcoholic"], img: "./food_Items/Drinks/Asahi.jpg", price: "3.99"},
-    {name: "Gekkeikan Sake", tag: ["all","Drinks", "Alcoholic"], img: "./food_Items/Drinks/Gekkeikan-Sake.jpg", price: "5.99"},
-    {name: "Hello Kitty Sake", tag: ["all","Drinks", "Alcoholic", "Special"], img: "./food_Items/Drinks/Hello-Kitty-Sake-Special.jpg", price: "9.99"},
-    {name: "Oolong Tea", tag: ["all","Drinks", "Tea"], img: "./food_Items/Drinks/Oolong-Tea.jpg", price: "2.99"},
-    {name: "Sapporo Premium", tag: ["all","Drinks, Alcoholic"], img: "./food_Items/Drinks/Sapporo-Premium.jpg", price: "3.99"},
-    {name: "Sprite", tag: ["all","Drinks", "Soda"], img: "./food_Items/Drinks/Sprite.jpg", price: "2.99"},
     {name: "Karagee", tag: ["all","Entree"], img: "./food_Items/Entrees/Karaage.jpg", price: "5.99"},
     {name: "Miso Soup", tag: ["all","Entree"], img: "./food_Items/Entrees/miso-soup.jpg", price: "2.99"},
     {name: "Onigiri", tag: ["all","Entree"], img: "./food_Items/Entrees/Onigiri.jpg", price: "3.99"},
@@ -47,7 +45,13 @@ let menuItems = [
     {name: "Taokyaki", tag: ["all","Entree"], img: "./food_Items/Entrees/Takoyaki.jpg", price: "5.99"},
     {name: "Pork Bowl", tag: ["all","Lunch"], img: "./food_Items/Lunch/Pork-Bowl.jpg", price: "8.99"},
     {name: "Sushi Lunch Package", tag: ["all","Lunch", "Meal"], img: "./food_Items/Lunch/Sushi-Lunch-Package.jpg", price: "12.99"},
-    {name: "Tonkatsu Bento", tag: ["all","Lunch", "Meal"], img: "./food_Items/Lunch/Tonkatsu-Bento.jpg", price: "10.99"}
+    {name: "Tonkatsu Bento", tag: ["all","Lunch", "Meal"], img: "./food_Items/Lunch/Tonkatsu-Bento.jpg", price: "10.99"},
+    {name: "Asahi", tag:["all", "Drinks", "Alcoholic"], img: "./food_Items/Drinks/Asahi.jpg", price: "3.99"},
+    {name: "Gekkeikan Sake", tag: ["all","Drinks", "Alcoholic"], img: "./food_Items/Drinks/Gekkeikan-Sake.jpg", price: "5.99"},
+    {name: "Hello Kitty Sake", tag: ["all","Drinks", "Alcoholic", "Special"], img: "./food_Items/Drinks/Hello-Kitty-Sake-Special.jpg", price: "9.99"},
+    {name: "Oolong Tea", tag: ["all","Drinks", "Tea"], img: "./food_Items/Drinks/Oolong-Tea.jpg", price: "2.99"},
+    {name: "Sapporo Premium", tag: ["all","Drinks, Alcoholic"], img: "./food_Items/Drinks/Sapporo-Premium.jpg", price: "3.99"},
+    {name: "Sprite", tag: ["all","Drinks", "Soda"], img: "./food_Items/Drinks/Sprite.jpg", price: "2.99"},
 ]
 
 let clickedArray = [{allClicked: 0},
@@ -57,10 +61,11 @@ let clickedArray = [{allClicked: 0},
 {lunchClicked: 0},
 {childClicked:  0},
 {allEatClicked: 0},
-{fullMealsClicked: 0}]
+{fullMealsClicked: 0},
+{drinksClicked: 0}]
 
 const appendingArray = [{tag: "ul", item: allMenu, text: ["Full Menu"], visibility: "hidden"}, {tag: "ul", item: breakfastMenu, text: "Breakfast Menu", visibility: "hidden"}, {tag: "ul", item: lunchMenu, text: "Lunch Menu", visibility: "hidden"}, {tag: "ul", item: entreeMenu, text: ["Entree Menu"], visibility: "hidden"}, {tag: "ul", item: dinnerMenu, text: "Dinner Menu", visibility: "hidden"},  
-{tag: "ul", item: childMenu, text: "Children's Menu", visibility: "hidden"}, {tag: "ul", item: allYouCanEatMenu, text: "All You Can Eat Menu", visibility: "hidden"}, {tag: "ul", item: mealMenu, text: "Full Meals Menu", visibility: "hidden"},
+{tag: "ul", item: childMenu, text: "Children's Menu", visibility: "hidden"}, {tag: "ul", item: allYouCanEatMenu, text: "All You Can Eat Menu", visibility: "hidden"}, {tag: "ul", item: mealMenu, text: "Full Meals Menu", visibility: "hidden"}, {tag: "ul", item: drinkMenu, text: ["Drink Menu"], visibility: "hidden"},
 {tag: "button", item: displayMenu, text: "Display Menu"},
 {tag: "button", item: displayBreakfastMenu, text: "Display Breakfast Menu"},
 {tag: "button", item: displayLunchMenu, text: "Display Lunch Menu"},
@@ -69,12 +74,13 @@ const appendingArray = [{tag: "ul", item: allMenu, text: ["Full Menu"], visibili
 {tag: "button", item: displayChildMenu, text: "Display Children Menu"},
 {tag: "button", item: displayAllEatMenu, text: "Display All You Can Eat Menu"},
 {tag: "button", item: displayMealMenu, text: "Display Full Meal Menu"},
+{tag: "button", item: displayDrinkMenu, text: "Display Drink Menu"}
 ]
 
 appendingArray.map(item => {
     let button = item.item
     if(item.tag.includes("button")){
-        div.append(button)
+        menuNav.append(button)
         button.textContent = item.text
     }
 
@@ -99,12 +105,13 @@ function ifClicked(menuText, menuTag, menuType){
     })
     menuItems.map(item => {
         if(item.tag.includes(menuTag)){
-            const foodImg = document.createElement('img')
+        const foodImg = document.createElement('img')
         const foodList = document.createElement("li")
         menuType.append(foodList);
        foodList.textContent = `${item.name} ${item.price}`
        foodList.append(foodImg)
        foodImg.src = item.img
+       foodImg.classList.add("menu_pic")
         }
     })
 }
@@ -126,6 +133,7 @@ displayMenu.addEventListener("click", (e => {
     if(clickedArray[0].allClicked === 0){
         ifClicked("Full Menu", "all", allMenu)
         clickedArray[0].allClicked = 1;
+        foodImg.classList.add("mainMenu")
     }
     if(clickedArray[0].allClicked === 1){
         reClick("Full Menu")
@@ -198,6 +206,16 @@ displayMealMenu.addEventListener("click", (e => {
         clickedArray[7].fullMealsClicked = 1;
     } if(clickedArray[7].fullMealsClicked === 1){
         reClick("Full Meals Menu")
+    }
+   
+}))
+
+displayDrinkMenu.addEventListener("click", (e => {
+    if(clickedArray[8].drinksClicked === 0){
+        ifClicked("Drink Menu", "Drinks", drinkMenu)
+        clickedArray[8].drinksClicked = 1;
+    } if(clickedArray[8].drinksClicked === 1){
+        reClick("Drink Menu")
     }
    
 }))

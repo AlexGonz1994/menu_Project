@@ -1,3 +1,11 @@
-.something {
-  color: red;
+.menu_pic {
+  padding: 5px;
+  width: 25%;
+  height: auto;
+  display: flex;
+}
+
+li {
+  list-style-type: none;
+  margin-top: 15px;
 }
